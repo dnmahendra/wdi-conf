@@ -1,6 +1,3 @@
-// vue.js setup definitions
-var Vue = require('vue');
-var VueRouter = require('vue-router');
 // explicit installation of router needed when using CommonJS modules
 Vue.use(VueRouter);
 
@@ -11,6 +8,9 @@ var One = Vue.extend({
 var Two = Vue.extend({
   template: '<p>Displaying templating data for route two</p>'
 });
+var DbList = Vue.extend({
+  template: '<p>To list returned db contents</p>'
+});
 // define an empty App component for the root view (utilising html markup instead of template data)
 var App = Vue.extend({});
 
@@ -19,7 +19,8 @@ var router = new VueRouter();
 // routes mapped in the router should all have an associated component.
 router.map({
   '/one': { component: One },
-  '/two': { component: Two }
+  '/two': { component: Two },
+  '/db-list': { component: DbList }
 });
 // create new instance of the App component and mount it to the dom selector
 router.start(App, '#app');

@@ -2,32 +2,16 @@ var express = require('express');
 var router = express.Router();
 
 router.get('/', function(req, res) {
-  res.render('index');
-  // vue.js setup definitions
-  var Vue = require('vue');
-  var VueRouter = require('vue-router');
-  // explicit installation of router needed when using CommonJS modules
-  Vue.use(VueRouter);
+  var options = {
+    root: __dirname + '/../public/',
+    dotfiles: 'deny',
+    headers: {
+      'x-timestamp': Date.now(),
+      'x-sent': true
+    }
+  };
 
-  // define some simple vue components
-  var One = Vue.extend({
-    template: '<p>Displaying route one templating data</p>'
-  });
-  var Two = Vue.extend({
-    template: '<p>Displaying templating data for route two</p>'
-  });
-  // define an empty App component for the root view (utilising html markup instead of template data)
-  var App = Vue.extend({});
-
-  // new router instance
-  var vRouter = new VueRouter();
-  // routes mapped in the router should all have an associated component.
-  vRouter.map({
-    '/one': { component: One },
-    '/two': { component: Two }
-  });
-  // create new instance of the App component and mount it to the dom selector
-  vRouter.start(App, '#app');
+  res.sendFile('index.html', options);
 });
 
 module.exports = router;
