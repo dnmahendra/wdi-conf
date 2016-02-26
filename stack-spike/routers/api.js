@@ -1,8 +1,6 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
-// var Booking = require('./../db/model');
-
 var Schema = mongoose.Schema;
 
 // define a booking Schema
@@ -24,7 +22,7 @@ var bookingSchema = new Schema({
 // create a Booking model class
 var Booking = mongoose.model('Booking', bookingSchema);
 
-router.get('/', function(req, res) {
+router.get('/bookings', function(req, res) {
   Booking.find({}, function(err, results) {
     console.log('Mongoose document query method callback executed.');
     console.log(results);
