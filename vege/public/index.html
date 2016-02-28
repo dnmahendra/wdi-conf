@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>WDI5 Conf 2015-16</title>
+</head>
+<body>
+  <div id="app">
+    <h3>Vue Route Testing</h3>
+    <p>This heading and the links are static content within the app div of the index page.</p>
+    <p>
+      <a v-link="{ path: '/one' }">Route One</a>
+      <a v-link="{ path: '/two' }">Route Two</a>
+      <a v-link="{ path: '/db-list' }">DB List</a>
+    </p>
+    <p>Below this is a dynamic section updated through router calls made by clicking the links.</p>
+    <router-view></router-view>
+  </div>
+  <script src="js/bundle.js"></script>
+</body>
+</html>

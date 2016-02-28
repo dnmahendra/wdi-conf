@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>WDI Conf Admin Page</title>
+</head>
+<body>
+  <div class="container">
+    Admin. woo.
+    <button id="add">add record</button>
+    <div class="bookings"></div>
+  </div>
+  <script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
+  <script>
+    // activate add record button
+    $('#add').on('click', function() {
+      console.log('adding new booking record');
+      $.ajax({
+        url:'/api/bookings/new',
+        method: 'POST'
+      });
+    });
+  </script>
+  <script>
+    // populate current booking data
+    $.ajax({
+      url: '/api/bookings',
+      dataType: 'json'
+    }).done(function( data ) {
+      $.each(data, function( index, booking ) {
+        console.log('Booking logged with id: ', booking._id);
+        var bookingEntry = $(document.createElement('div'));
+        var details = "";
+        $.each(booking, function( index, value ) {
+          details += index + ": " + value + "<br>";
+        });
+        bookingEntry.html('<p> Booking logged with id: ' + booking._id + '</p>' + details);
+        var deleteButton = $(document.createElement('button'));
+        deleteButton.text('delete');
+        deleteButton.on('click' , function() {
+          $.ajax({
+            url:'/api/bookings/' + booking._id,
+            method: 'DELETE'
+          });
+          console.log('delete button clicked.');
+        });
+        bookingEntry.append(deleteButton);
+        $('.bookings').append(bookingEntry);
+      });
+    });
+  </script>
+</body>
+</html>
