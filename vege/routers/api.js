@@ -59,7 +59,6 @@ router.route('/bookings')
 router.route('/bookings/new')
 .post(urlencodedParser, function(req, res, next) {
   console.log('Creating a new booking.');
-  // to be updated with posted data.
   var booking = new Booking(req.body);
   booking.save( function() {
     console.log('Mongoose document save method callback executed.');
@@ -73,9 +72,15 @@ router.route('/bookings/:id')
   console.log('Displaying booking with id: ', req.booking._id);
   res.send(req.booking);
 })
-.put(function(req, res, next) {
+.put(urlencodedParser,function(req, res, next) {
   console.log('Updating booking with id: ', req.booking._id);
-  res.send();
+  Booking.findById(id, function (err, booking) {
+    booking = req.body;
+    booking.save( function() {
+      console.log('Mongoose document put update method callback executed');
+    });
+    res.send();
+  });
 })
 .delete(deleteBookingById, function(req, res, next) {
   console.log('Deleting booking with id: ', req.booking._id);

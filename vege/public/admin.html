@@ -8,19 +8,36 @@
   <div class="container">
     Admin. woo.
     <button id="addRandom">add random record</button>
-    <!-- <p>
-      <form action="/api/bookings/new" method="post">
-        <input type="text" placeholder="conf name">
-        <button>submit</button>
-      </form>
-    </p> -->
+    <p>
+      <input type="text" placeholder="conf name" id="conferenceInput">
+      <input type="text" placeholder="seat" id="seatInput">
+      <input type="text" placeholder="seat score" id="seatScoreInput">
+      <input type="text" placeholder="attendee" id="attendeeInput">
+      <button id="addBooking">add booking</button>
+    </p>
     <div class="bookings"></div>
   </div>
   <script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
   <script>
+    // add user defined booking based on input
+    $('#addBooking').on('click', function() {
+      console.log('adding user defined booking record');
+      $.ajax({
+        url:'/api/bookings/new',
+        method:'POST',
+        data: {
+          "conference": $('#conferenceInput').val(),
+          "seat": Number($('#seatInput').val()),
+          "seatScore": Number($('#seatScoreInput').val()),
+          "attendee": $('#attendeeInput').val()
+        }
+      });
+    });
+  </script>
+  <script>
     // activate add record button
     $('#addRandom').on('click', function() {
-      console.log('adding new booking record');
+      console.log('adding random booking record');
       $.ajax({
         url:'/api/bookings/new',
         method: 'POST',
@@ -42,11 +59,8 @@
       $.each(data, function( index, booking ) {
         console.log('Booking logged with id: ', booking._id);
         var bookingEntry = $(document.createElement('div'));
-        var details = "";
-        $.each(booking, function( index, value ) {
-          details += index + ": " + value + "<br>";
-        });
-        bookingEntry.html('<p> Booking logged with id: ' + booking._id + '</p>' + details);
+        var details = "Booking id: " + booking._id + " for attendee: " + booking.attendee;
+        bookingEntry.html('<p>' + details + '</p>');
         var deleteButton = $(document.createElement('button'));
         deleteButton.text('delete');
         deleteButton.on('click' , function() {
