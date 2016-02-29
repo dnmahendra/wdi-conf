@@ -5,7 +5,7 @@
   <title>WDI5 Conf 2015-16</title>
 </head>
 <body>
-  <div id="app">
+  <!-- <div id="app">
     <h3>Vue Route Testing</h3>
     <p>This heading and the links are static content within the app div of the index page.</p>
     <p>
@@ -15,6 +15,15 @@
     </p>
     <p>Below this is a dynamic section updated through router calls made by clicking the links.</p>
     <router-view></router-view>
+  </div> -->
+  <div id="app-test">
+    <input type="text" v-model="newTodo" v-on:keyup.enter="addTodo">
+    <ul>
+      <li v-for="todo in todos">
+        <span>{{ todo.text }}</span>
+        <button v-on:click="removeTodo($index)">X</button>
+      </li>
+    </ul>
   </div>
   <script src="js/bundle.js"></script>
 </body>
