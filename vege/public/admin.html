@@ -7,17 +7,29 @@
 <body>
   <div class="container">
     Admin. woo.
-    <button id="add">add record</button>
+    <button id="addRandom">add random record</button>
+    <!-- <p>
+      <form action="/api/bookings/new" method="post">
+        <input type="text" placeholder="conf name">
+        <button>submit</button>
+      </form>
+    </p> -->
     <div class="bookings"></div>
   </div>
   <script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
   <script>
     // activate add record button
-    $('#add').on('click', function() {
+    $('#addRandom').on('click', function() {
       console.log('adding new booking record');
       $.ajax({
         url:'/api/bookings/new',
-        method: 'POST'
+        method: 'POST',
+        data: {
+          "conference": "WDI5",
+          "seat": Math.ceil(Math.random() * 40),
+          "seatScore": Math.ceil(Math.random() * 100),
+          "attendee": "@Cake_Pudding"
+        }
       });
     });
   </script>

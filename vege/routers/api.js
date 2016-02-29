@@ -1,5 +1,8 @@
 var express = require('express');
 var router = express.Router();
+var bodyParser = require('body-parser');
+var jsonParser = bodyParser.json();
+var urlencodedParser = bodyParser.urlencoded({ extended: false });
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
@@ -54,16 +57,11 @@ router.route('/bookings')
 
 // add a booking input to the db via post (i.e. a new booking is being made)
 router.route('/bookings/new')
-.post(function(req, res, next) {
+.post(urlencodedParser, function(req, res, next) {
   console.log('Creating a new booking.');
   // to be updated with posted data.
-  var testBooking = new Booking({
-    conference: "WDI5",
-    seat: Math.ceil(Math.random() * 40),
-    seatScore: Math.ceil(Math.random() * 100),
-    attendee: "@Cake_Pudding"
-  });
-  testBooking.save( function() {
+  var booking = new Booking(req.body);
+  booking.save( function() {
     console.log('Mongoose document save method callback executed.');
   });
   res.send();
