@@ -9,8 +9,23 @@ var eslint = require('gulp-eslint');
 
 var b = watchify( browserify('./public/js/vue-app.js'));
 gulp.task('bundle', function() {
+  b.on('error', function(e) {
+    console.log(e);
+    b.end();
+  });
   return b.bundle()
     .pipe( source('bundle.js') )
+    .pipe( gulp.dest('./public/js') );
+});
+
+var bAdmin = watchify( browserify('./public/js/vue-admin-app.js'));
+gulp.task('bundle-admin', function() {
+  bAdmin.on('error', function(e) {
+    console.log(e);
+    b.end();
+  });
+  return bAdmin.bundle()
+    .pipe( source('bundle-admin.js') )
     .pipe( gulp.dest('./public/js') );
 });
 
@@ -42,7 +57,7 @@ gulp.task('test', function() {
 
 gulp.task('watch', function() {
   // gulp.watch('./scss/*.scss', ['sass']);
-  gulp.watch('./public/js/*.js', ['bundle']);
+  gulp.watch('./public/js/*.js', ['bundle', 'bundle-admin']);
 });
 
 gulp.task('default', ['watch']);

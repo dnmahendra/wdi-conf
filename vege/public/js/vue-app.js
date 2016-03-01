@@ -71,5 +71,3 @@ var $ = require('jquery');
 //     }
 //   }
 // });
-
-var

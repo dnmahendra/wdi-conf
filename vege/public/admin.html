@@ -3,10 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <title>WDI Conf Admin Page</title>
+  <link rel="stylesheet" href="css/admin-style.css">
 </head>
 <body>
   <div class="container">
-    Admin. woo.
+    <div id="admin">
+      <h3 class="title">{{ conference }} Admin Page. {{ name }} o/</h3>
+      <div>
+        <button v-on:click="loadBookings">Load Bookings</button>
+      </div>
+      <div>Current number of bookings: {{ bookings.length }}</div>
+      <booking v-for="b in bookings" :details="bookings[$index]"></booking>
+    </div>
+    <!-- Admin. woo.
     <button id="addRandom">add random record</button>
     <p>
       <input type="text" placeholder="conf name" id="conferenceInput">
@@ -15,10 +24,10 @@
       <input type="text" placeholder="attendee" id="attendeeInput">
       <button id="addBooking">add booking</button>
     </p>
-    <div class="bookings"></div>
+    <div class="bookings"></div> -->
   </div>
-  <script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
-  <script>
+  <script src="js/bundle-admin.js"></script>
+  <!-- <script>
     // add user defined booking based on input
     $('#addBooking').on('click', function() {
       console.log('adding user defined booking record');
@@ -74,6 +83,6 @@
         $('.bookings').append(bookingEntry);
       });
     });
-  </script>
+  </script> -->
 </body>
 </html>
