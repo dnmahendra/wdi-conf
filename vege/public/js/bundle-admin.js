@@ -19844,7 +19844,6 @@ var Vue = require('vue');
 var AdminApp = require('./vue/admin-app.vue');
 var $ = require('jquery');
 
-var Test = Vue.extend({});
 Vue.component('admin-app', AdminApp);
 
 new Vue({
@@ -19862,7 +19861,11 @@ module.exports = {
     return {
       conference: 'WDI5',
       name: 'jb',
-      bookings: []
+      bookings: [],
+      inputConference: 'WDI5',
+      inputAttendee: '@dt',
+      inputSeat: 0,
+      inputSeatScore: 10
     };
   },
   methods: {
@@ -19875,12 +19878,45 @@ module.exports = {
         dataType: 'json'
       }).done(function (data) {
         vueContext.bookings = data;
-      }, this);
+      });
+    },
+    addRandomBooking: function addRandomBooking() {
+      console.log('Adding random booking');
+      $.ajax({
+        url: '/api/bookings/new',
+        dataType: 'json',
+        method: 'POST',
+        data: {
+          "conference": "WDI5",
+          "seat": Math.ceil(Math.random() * 40),
+          "seatScore": Math.ceil(Math.random() * 100),
+          "attendee": "@Cake_Pudding"
+        }
+      });
+    },
+    addCustomBooking: function addCustomBooking() {
+      console.log('Adding custom booking');
+      var vueContext = this;
+      $.ajax({
+        url: '/api/bookings/new',
+        context: vueContext,
+        dataType: 'json',
+        method: 'POST',
+        data: {
+          "conference": vueContext.inputConference,
+          "seat": vueContext.inputSeat,
+          "seatScore": vueContext.inputSeatScore,
+          "attendee": vueContext.inputAttendee
+        }
+      });
     }
+  },
+  components: {
+    booking: require('./booking-app.vue')
   }
 };
 if (module.exports.__esModule) module.exports = module.exports.default
-;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<div class=\"admin\">\n  <h3 class=\"title\">{{ conference }} Admin Page. {{ name }} o/</h3>\n  <div>\n    <button v-on:click=\"loadBookings\">Load Bookings</button>\n  </div>\n  <div>Current number of bookings: {{ bookings.length }}</div>\n  <div v-for=\"b in bookings\" :details=\"bookings[$index]\">{{ b.attendee }}</div>\n</div>\n"
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<div class=\"admin\">\n  <h3 class=\"title\">{{ conference }} Admin Page. {{ name }} o/</h3>\n  <div>\n    <input type=\"text\" v-model=\"inputConference\" placeholder=\"Conference\">\n    <input type=\"text\" v-model=\"inputAttendee\" placeholder=\"Attendee\">\n    <input type=\"text\" v-model=\"inputSeat\" placeholder=\"Seat\">\n    <input type=\"text\" v-model=\"inputSeatScore\" placeholder=\"Seat Score\">\n    <button v-on:click=\"addCustomBooking\">Add custom booking</button>\n  </div>\n  <br>\n  <div>\n    <button v-on:click=\"loadBookings\">Load Bookings</button>\n    <button v-on:click=\"addRandomBooking\">Add Random</button>\n  </div>\n  <div>Current number of bookings: {{ bookings.length }}</div>\n  <br>\n  <booking v-for=\"item in bookings\" :details=\"bookings[$index]\"></booking>\n</div>\n<br>\n"
 if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
@@ -19888,6 +19924,43 @@ if (module.hot) {(function () {  module.hot.accept()
   var id = "/home/josh/ga/wdi5/ga-projects/wdi-conf/vege/public/js/vue/admin-app.vue"
   module.hot.dispose(function () {
     require("vueify-insert-css").cache["\n.admin {\nbackground-color: linen;\n}\n.title {\ntext-align: center;\n}\n"] = false
+    document.head.removeChild(__vueify_style__)
+  })
+  if (!module.hot.data) {
+    hotAPI.createRecord(id, module.exports)
+  } else {
+    hotAPI.update(id, module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
+  }
+})()}
+},{"./booking-app.vue":8,"jquery":1,"vue":4,"vue-hot-reload-api":3,"vueify-insert-css":5}],8:[function(require,module,exports){
+var __vueify_style__ = require("vueify-insert-css").insert("\n.booking {\nbackground-color: plum;\n}\n")
+'use strict';
+
+var $ = require('jquery');
+
+module.exports = {
+  methods: {
+    deleteBooking: function deleteBooking() {
+      var vueContext = this;
+      $.ajax({
+        url: '/api/bookings/' + vueContext.details._id,
+        method: 'DELETE'
+      }).done(function () {
+        console.log('API call to delete record has returned.');
+      });
+    }
+  },
+  props: ['details']
+};
+if (module.exports.__esModule) module.exports = module.exports.default
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<div class=\"booking\">\n  <div>Attendee: {{ details.attendee }}</div>\n  <div>Seat: {{ details.seat }}</div>\n  <div>Seat score: {{ details.seatScore }}</div>\n  <button v-on:click=\"deleteBooking\">Delete Booking</button>\n</div>\n<br>\n"
+if (module.hot) {(function () {  module.hot.accept()
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), true)
+  if (!hotAPI.compatible) return
+  var id = "/home/josh/ga/wdi5/ga-projects/wdi-conf/vege/public/js/vue/booking-app.vue"
+  module.hot.dispose(function () {
+    require("vueify-insert-css").cache["\n.booking {\nbackground-color: plum;\n}\n"] = false
     document.head.removeChild(__vueify_style__)
   })
   if (!module.hot.data) {

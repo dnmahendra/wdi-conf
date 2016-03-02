@@ -38,6 +38,7 @@ var getBookings = function(req, res, next) {
 var deleteBookingById = function(req, res, next) {
   Booking.remove({'_id': req.booking._id}, function() {
     console.log('Mongoose document removed with id: ', req.booking._id);
+    return next();
   });
 };
 
