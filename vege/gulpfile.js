@@ -1,11 +1,11 @@
 var gulp = require('gulp');
-// var sass = require('gulp-sass');
+var sass = require('gulp-sass');
 // var connect = require('gulp-connect');
 var browserify = require('browserify');
 var vueify = require('vueify');
 var source = require('vinyl-source-stream');
 var watchify = require('watchify');
-// var autoprefixer = require('gulp-autoprefixer');
+var autoprefixer = require('gulp-autoprefixer');
 var eslint = require('gulp-eslint');
 
 var b = watchify( browserify('./public/js/vue-app.js'));
@@ -19,6 +19,7 @@ gulp.task('bundle', function() {
     .pipe( gulp.dest('./public/js') );
 });
 
+// admin page js bundling
 var bAdmin = browserify('./public/js/vue-admin-app.js');
 gulp.task('bundle-admin', function() {
   // bAdmin.on('error', function(e) {
@@ -29,6 +30,15 @@ gulp.task('bundle-admin', function() {
     .transform( vueify )
     .bundle()
     .pipe( source('bundle-admin.js') )
+    .pipe( gulp.dest('./public/js') );
+});
+
+// conf page js bundling
+var bConf = browserify('./public/js/conf.js');
+gulp.task('bundle-conf', function() {
+  return bConf
+    .bundle()
+    .pipe( source('bundle-conf.js') )
     .pipe( gulp.dest('./public/js') );
 });
 
@@ -51,12 +61,12 @@ gulp.task('test', function() {
 // });
 
 // sass
-// gulp.task('sass', function() {
-//   gulp.src('./scss/*.scss')
-//     .pipe( sass() )
-//     .pipe( autoprefixer() )
-//     .pipe( gulp.dest('css') );
-// });
+gulp.task('sass', function() {
+  gulp.src('./public/scss/style.scss')
+    .pipe( sass().on('error', sass.logError) )
+    .pipe( autoprefixer() )
+    .pipe( gulp.dest('./public/css') );
+});
 
 gulp.task('watch', function() {
   // gulp.watch('./scss/*.scss', ['sass']);

@@ -4,7 +4,7 @@
 
 }
 .timeline-container {
-  
+
   margin: 20px auto;
   width: 100%;
   display: flex;
@@ -44,7 +44,7 @@
   align-self: center;
 }
 .timeline-wrapper h2 {
-  background: url(./images/timeline_century_tick.gif) left center no-repeat;
+  background: url(images/timeline_century_tick.gif) left center no-repeat;
   font-family: Palatino, "Times New Roman", Times, serif;
   cursor: pointer;
   font-size: 1em;
@@ -71,7 +71,7 @@
   width: 25%;
 }
 .timeline-series dt {
-  background: url(./images/timeline_decade_tick.gif) left center no-repeat;
+  background: url(images/timeline_decade_tick.gif) left center no-repeat;
   clear: left;
   font-size: 1em;
   list-style-type: none;
