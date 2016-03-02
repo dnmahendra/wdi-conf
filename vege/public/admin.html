@@ -6,83 +6,8 @@
   <link rel="stylesheet" href="css/admin-style.css">
 </head>
 <body>
-  <div class="container">
-    <div id="admin">
-      <h3 class="title">{{ conference }} Admin Page. {{ name }} o/</h3>
-      <div>
-        <button v-on:click="loadBookings">Load Bookings</button>
-      </div>
-      <div>Current number of bookings: {{ bookings.length }}</div>
-      <booking v-for="b in bookings" :details="bookings[$index]"></booking>
-    </div>
-    <!-- Admin. woo.
-    <button id="addRandom">add random record</button>
-    <p>
-      <input type="text" placeholder="conf name" id="conferenceInput">
-      <input type="text" placeholder="seat" id="seatInput">
-      <input type="text" placeholder="seat score" id="seatScoreInput">
-      <input type="text" placeholder="attendee" id="attendeeInput">
-      <button id="addBooking">add booking</button>
-    </p>
-    <div class="bookings"></div> -->
-  </div>
+  <admin-app></admin-app>
+  <admin-app></admin-app>
   <script src="js/bundle-admin.js"></script>
-  <!-- <script>
-    // add user defined booking based on input
-    $('#addBooking').on('click', function() {
-      console.log('adding user defined booking record');
-      $.ajax({
-        url:'/api/bookings/new',
-        method:'POST',
-        data: {
-          "conference": $('#conferenceInput').val(),
-          "seat": Number($('#seatInput').val()),
-          "seatScore": Number($('#seatScoreInput').val()),
-          "attendee": $('#attendeeInput').val()
-        }
-      });
-    });
-  </script>
-  <script>
-    // activate add record button
-    $('#addRandom').on('click', function() {
-      console.log('adding random booking record');
-      $.ajax({
-        url:'/api/bookings/new',
-        method: 'POST',
-        data: {
-          "conference": "WDI5",
-          "seat": Math.ceil(Math.random() * 40),
-          "seatScore": Math.ceil(Math.random() * 100),
-          "attendee": "@Cake_Pudding"
-        }
-      });
-    });
-  </script>
-  <script>
-    // populate current booking data
-    $.ajax({
-      url: '/api/bookings',
-      dataType: 'json'
-    }).done(function( data ) {
-      $.each(data, function( index, booking ) {
-        console.log('Booking logged with id: ', booking._id);
-        var bookingEntry = $(document.createElement('div'));
-        var details = "Booking id: " + booking._id + " for attendee: " + booking.attendee;
-        bookingEntry.html('<p>' + details + '</p>');
-        var deleteButton = $(document.createElement('button'));
-        deleteButton.text('delete');
-        deleteButton.on('click' , function() {
-          $.ajax({
-            url:'/api/bookings/' + booking._id,
-            method: 'DELETE'
-          });
-          console.log('delete button clicked.');
-        });
-        bookingEntry.append(deleteButton);
-        $('.bookings').append(bookingEntry);
-      });
-    });
-  </script> -->
 </body>
 </html>

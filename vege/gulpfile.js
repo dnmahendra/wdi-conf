@@ -2,6 +2,7 @@ var gulp = require('gulp');
 // var sass = require('gulp-sass');
 // var connect = require('gulp-connect');
 var browserify = require('browserify');
+var vueify = require('vueify');
 var source = require('vinyl-source-stream');
 var watchify = require('watchify');
 // var autoprefixer = require('gulp-autoprefixer');
@@ -18,13 +19,15 @@ gulp.task('bundle', function() {
     .pipe( gulp.dest('./public/js') );
 });
 
-var bAdmin = watchify( browserify('./public/js/vue-admin-app.js'));
+var bAdmin = browserify('./public/js/vue-admin-app.js');
 gulp.task('bundle-admin', function() {
-  bAdmin.on('error', function(e) {
-    console.log(e);
-    b.end();
-  });
-  return bAdmin.bundle()
+  // bAdmin.on('error', function(e) {
+  //   console.log(e);
+  //   b.end();
+  // });
+  return bAdmin
+    .transform( vueify )
+    .bundle()
     .pipe( source('bundle-admin.js') )
     .pipe( gulp.dest('./public/js') );
 });
