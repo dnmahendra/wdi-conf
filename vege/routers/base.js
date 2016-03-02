@@ -27,4 +27,17 @@ router.get('/game', function(req, res) {
   res.sendFile('clumsy-index.html', options);
 });
 
+router.get('/conf', function(req, res) {
+  var options = {
+    root: __dirname + '/../public/',
+    dotfiles: 'deny',
+    headers: {
+      'x-timestamp': Date.now(),
+      'x-sent': true
+    }
+  };
+
+  res.sendFile('conf.html', options);
+});
+
 module.exports = router;
