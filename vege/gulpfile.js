@@ -37,7 +37,8 @@ gulp.task('bundle-admin', function() {
 var bConf = browserify('./public/js/conf.js');
 gulp.task('bundle-conf', function() {
   return bConf
-    .bundle()
+    .transform( vueify )
+    .bundle().on('error', function(e) { console.log('bundle conf error', e); })
     .pipe( source('bundle-conf.js') )
     .pipe( gulp.dest('./public/js') );
 });

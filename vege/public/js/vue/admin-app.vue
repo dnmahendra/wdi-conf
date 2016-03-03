@@ -1,4 +1,3 @@
-
 <template>
   <div class="admin">
     <h3 class="title">{{ conference }} Admin Page. {{ name }} o/</h3>
@@ -40,9 +39,9 @@ module.exports = {
       name: 'jb',
       bookings: [],
       inputConference: 'WDI5',
-      inputAttendee: '@dt',
+      inputAttendee: 'none',
       inputSeat: 0,
-      inputSeatScore: 10
+      inputSeatScore: 0
     }
   },
   methods: {
