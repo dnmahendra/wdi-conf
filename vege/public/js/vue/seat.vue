@@ -1,6 +1,6 @@
 <template>
   <div class="seat-container">
-    <div class="conf-seat" v-bind:class="{ 'booked': isBooked, 'selected': isSelected }">
+    <div class="conf-seat" v-bind:class="{ 'booked': isBooked, 'selected': isSelected }" v-on:click="toggleSelected">
       <p>{{ item.seat }}</p>
       <p id="seat-score">{{ item.seatScore }}</p>
     </div>
@@ -40,7 +40,7 @@
 .selected {
   background-color: grey;
 }
-.booked .selected {
+.booked.selected {
   background-color: fuchsia;
 }
 #seat-score {
@@ -61,6 +61,11 @@ module.exports = {
   },
   ready: function() {
     this.isBooked = ( this.item.attendee != 'none');
+  },
+  methods: {
+    toggleSelected: function() {
+      this.isSelected = !this.isSelected;
+    }
   },
   props: ['item', 'index']
 };

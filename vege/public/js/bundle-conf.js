@@ -24567,7 +24567,7 @@ if (module.hot) {(function () {  module.hot.accept()
   }
 })()}
 },{"vue":14,"vue-hot-reload-api":13,"vueify-insert-css":15}],21:[function(require,module,exports){
-var __vueify_style__ = require("vueify-insert-css").insert("\n.booking-container {\n  width: 90%;\n  height: 80vh;\n  margin: 0 auto;\n}\n.seat-container {\n  box-sizing: border-box;\n  padding: 2%;\n  width: 20%;\n  height: 30%;\n  float: left;\n  background-color: linen;\n  border: 1px solid grey;\n}\n.conf-seat {\n  margin: 0 auto;\n  width: 60px;\n  height: 110px;\n  border: 5px solid grey;\n  border-radius: 5px;\n}\n.conf-seat:hover {\n  background-color: rgba(255, 0, 0, 0.5);\n  cursor: pointer;\n}\n.booked {\n  background-color: red;\n}\n.selected {\n  background-color: grey;\n}\n.booked .selected {\n  background-color: fuchsia;\n}\n#seat-score {\n  text-align: center;\n  line-height: 100px;\n  font-weight: bold;\n  font-size: 1.5em;\n}\n")
+var __vueify_style__ = require("vueify-insert-css").insert("\n.booking-container {\n  width: 90%;\n  height: 80vh;\n  margin: 0 auto;\n}\n.seat-container {\n  box-sizing: border-box;\n  padding: 2%;\n  width: 20%;\n  height: 30%;\n  float: left;\n  background-color: linen;\n  border: 1px solid grey;\n}\n.conf-seat {\n  margin: 0 auto;\n  width: 60px;\n  height: 110px;\n  border: 5px solid grey;\n  border-radius: 5px;\n}\n.conf-seat:hover {\n  background-color: rgba(255, 0, 0, 0.5);\n  cursor: pointer;\n}\n.booked {\n  background-color: red;\n}\n.selected {\n  background-color: grey;\n}\n.booked.selected {\n  background-color: fuchsia;\n}\n#seat-score {\n  text-align: center;\n  line-height: 100px;\n  font-weight: bold;\n  font-size: 1.5em;\n}\n")
 'use strict';
 
 module.exports = {
@@ -24580,17 +24580,22 @@ module.exports = {
   ready: function ready() {
     this.isBooked = this.item.attendee != 'none';
   },
+  methods: {
+    toggleSelected: function toggleSelected() {
+      this.isSelected = !this.isSelected;
+    }
+  },
   props: ['item', 'index']
 };
 if (module.exports.__esModule) module.exports = module.exports.default
-;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<div class=\"seat-container\">\n  <div class=\"conf-seat\" v-bind:class=\"{ 'booked': isBooked, 'selected': isSelected }\">\n    <p>{{ item.seat }}</p>\n    <p id=\"seat-score\">{{ item.seatScore }}</p>\n  </div>\n  <p>{{ item.attendee }}</p>\n</div>\n"
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<div class=\"seat-container\">\n  <div class=\"conf-seat\" v-bind:class=\"{ 'booked': isBooked, 'selected': isSelected }\" v-on:click=\"toggleSelected\">\n    <p>{{ item.seat }}</p>\n    <p id=\"seat-score\">{{ item.seatScore }}</p>\n  </div>\n  <p>{{ item.attendee }}</p>\n</div>\n"
 if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
   var id = "/home/josh/ga/wdi5/ga-projects/wdi-conf/vege/public/js/vue/seat.vue"
   module.hot.dispose(function () {
-    require("vueify-insert-css").cache["\n.booking-container {\n  width: 90%;\n  height: 80vh;\n  margin: 0 auto;\n}\n.seat-container {\n  box-sizing: border-box;\n  padding: 2%;\n  width: 20%;\n  height: 30%;\n  float: left;\n  background-color: linen;\n  border: 1px solid grey;\n}\n.conf-seat {\n  margin: 0 auto;\n  width: 60px;\n  height: 110px;\n  border: 5px solid grey;\n  border-radius: 5px;\n}\n.conf-seat:hover {\n  background-color: rgba(255, 0, 0, 0.5);\n  cursor: pointer;\n}\n.booked {\n  background-color: red;\n}\n.selected {\n  background-color: grey;\n}\n.booked .selected {\n  background-color: fuchsia;\n}\n#seat-score {\n  text-align: center;\n  line-height: 100px;\n  font-weight: bold;\n  font-size: 1.5em;\n}\n"] = false
+    require("vueify-insert-css").cache["\n.booking-container {\n  width: 90%;\n  height: 80vh;\n  margin: 0 auto;\n}\n.seat-container {\n  box-sizing: border-box;\n  padding: 2%;\n  width: 20%;\n  height: 30%;\n  float: left;\n  background-color: linen;\n  border: 1px solid grey;\n}\n.conf-seat {\n  margin: 0 auto;\n  width: 60px;\n  height: 110px;\n  border: 5px solid grey;\n  border-radius: 5px;\n}\n.conf-seat:hover {\n  background-color: rgba(255, 0, 0, 0.5);\n  cursor: pointer;\n}\n.booked {\n  background-color: red;\n}\n.selected {\n  background-color: grey;\n}\n.booked.selected {\n  background-color: fuchsia;\n}\n#seat-score {\n  text-align: center;\n  line-height: 100px;\n  font-weight: bold;\n  font-size: 1.5em;\n}\n"] = false
     document.head.removeChild(__vueify_style__)
   })
   if (!module.hot.data) {
