@@ -49,6 +49,9 @@ header {
   font-stretch: extra-expanded;
   font-family: "ITC Serif Gothic", Lato;
   color: white;
+  opacity: 1;
+  z-index: 1;
+  animation: logo 40s ease-out;
 }
 
 .date {
@@ -63,7 +66,23 @@ header {
  {
   font-size: 3em;
   color: none;
+  opacity: 1;
+  z-index: 1;
+  animation: logo 40s ease-out;
 }
+
+@keyframes logo {
+    0% { transform: scale(1); opacity: 1; }
+    10% { opacity: 0.5; }
+    20% { transform: scale(0.3); opacity: 0.3; }
+    30% { transform: scale(0.2); opacity: 0.2; }
+    40% { transform: scale(0.1); opacity: 0; }
+    60% { opacity: 0;  }
+    70% { opacity: 0; }
+    80% { opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
 
 .starwars:nth-child(1) {
   line-height: 0.5em;
@@ -185,10 +204,38 @@ img {
   flex: 2;
   width: 100%;
   background-color: black;
-  color: grey;
   font-family: 'Lato';
   font-size: smaller;
   font-weight: 900;
+
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 20px;
+}
+
+.contact h4 {
+  color: white;
+}
+
+.contact p {
+  color: #EEEEEE;
+}
+
+.register {
+  width: 30%;
+}
+
+.register p {
+  font-size: 10px;
+}
+
+.help {
+  width: 20%;
+}
+
+.email {
+  width: 20%;
 }
 
 .dt, .ga, .mj, .ms, .onepage {
@@ -202,4 +249,54 @@ img {
   color: grey;
   font-weight: bold;
   font-family: 'starwars'
+}
+
+#titles
+{
+    position: absolute;
+    width: 18em;
+    height: 50em;
+    bottom: 0;
+    left: 50%;
+    margin-left: -9em;
+    font-size: 350%;
+    text-align: justify;
+    overflow: hidden;
+    transform-origin: 50% 100%;
+    transform: perspective(300px) rotateX(45deg);
+    color: #ff6;
+}
+
+#titles:after
+{
+    position: absolute;
+    content: ' ';
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 60%;
+}
+
+#titles p
+{
+    text-align: justify;
+    margin: 0.8em 0;
+}
+
+#titles p.center
+{
+    text-align: center;
+}
+
+#titlecontent
+{
+    position: absolute;
+    top: 100%;
+    animation: scroll 80s linear 4s;
+}
+
+/* animation */
+@keyframes scroll {
+    0% { top: 100%; }
+    100% { top: -170%; }
 }
