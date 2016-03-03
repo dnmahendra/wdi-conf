@@ -2,6 +2,7 @@ var $ = require('jquery');
 require('jquery-easing');
 require('slimscroll');
 require('fullpage.js');
+require('./vue-app');
 
 $(document).ready(function() {
   $('#fullpage').fullpage({
@@ -287,19 +288,24 @@ $(document).ready(function() {
 
 var modalFlag = false;
 
-$(".booking").click(function(event){
+$(".booking").click(function(event) {
   if (!modalFlag) {
     $("#slider").toggleClass("open");
     modalFlag = true;
     event.stopPropagation();
   }
-});
-
-$(document).click(function(event) {
-  if (!$(event.target).is('#slider')) {
-    if(modalFlag) {
-        $("#slider").toggleClass("open");
-        modalFlag = false;
-      }
+  else {
+    $("#slider").toggleClass("open");
+    modalFlag = false;
+    event.stopPropagation();
   }
 });
+
+// $(document).click(function(event) {
+//   if (!$(event.target).is('#slider')) {
+//     if(modalFlag) {
+//         $("#slider").toggleClass("open");
+//         modalFlag = false;
+//     }
+//   }
+// });
