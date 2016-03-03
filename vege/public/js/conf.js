@@ -284,8 +284,8 @@ $(document).ready(function() {
       });
 });
 
-// where does this come from? JB (should it be a var dec?)
-modalFlag = false;
+
+var modalFlag = false;
 
 $(".booking").click(function(event){
   if (!modalFlag) {
@@ -295,10 +295,11 @@ $(".booking").click(function(event){
   }
 });
 
-
-$(document).click(function() {
-  if(modalFlag) {
-      $("#slider").toggleClass("open");
-      modalFlag = false;
-    }
+$(document).click(function(event) {
+  if (!$(event.target).is('#slider')) {
+    if(modalFlag) {
+        $("#slider").toggleClass("open");
+        modalFlag = false;
+      }
+  }
 });
