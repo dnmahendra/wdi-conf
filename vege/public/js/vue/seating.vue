@@ -88,6 +88,13 @@ module.exports = {
   components: {
     seat: require('./seat.vue')
   },
+  events: {
+    'seat-selected': function (data) {
+      if (data) {
+        this.$broadcast('seat-selected', true);
+      }
+    }
+  },
   props: ['details']
 };
 </script>

@@ -24582,7 +24582,16 @@ module.exports = {
   },
   methods: {
     toggleSelected: function toggleSelected() {
+      this.$dispatch('seat-selected', true);
       this.isSelected = !this.isSelected;
+    }
+  },
+  events: {
+    'seat-selected': function seatSelected(data) {
+      if (data) {
+        // if any seat is selected receive event from parent to turn off selection.
+        this.isSelected = false;
+      }
     }
   },
   props: ['item', 'index']
@@ -24619,6 +24628,13 @@ module.exports = {
   },
   components: {
     seat: require('./seat.vue')
+  },
+  events: {
+    'seat-selected': function seatSelected(data) {
+      if (data) {
+        this.$broadcast('seat-selected', true);
+      }
+    }
   },
   props: ['details']
 };
