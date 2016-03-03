@@ -55,9 +55,12 @@
 module.exports = {
   data: function() {
     return {
-      isBooked: true,
+      isBooked: false,
       isSelected: false
     }
+  },
+  ready: function() {
+    this.isBooked = ( this.item.attendee != 'none');
   },
   props: ['item', 'index']
 };

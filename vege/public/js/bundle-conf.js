@@ -24573,14 +24573,17 @@ var __vueify_style__ = require("vueify-insert-css").insert("\n.booking-container
 module.exports = {
   data: function data() {
     return {
-      isBooked: true,
+      isBooked: false,
       isSelected: false
     };
+  },
+  ready: function ready() {
+    this.isBooked = this.item.attendee != 'none';
   },
   props: ['item', 'index']
 };
 if (module.exports.__esModule) module.exports = module.exports.default
-;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<div class=\"seat-container\">\n  <div class=\"conf-seat\" v-bind:class=\"{ 'booked': isBooked, 'selected': isSelected }\">\n    <p>{{ item.seat }}</p>\n    <p id=\"seat-score\">{{ item.seatScore }}</p>\n  </div>\n  <p>{{ item.attendee }}</p>\n</div>\n<!-- <input type=\"text\" v-model=\"isBooked\"/> -->\n"
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<div class=\"seat-container\">\n  <div class=\"conf-seat\" v-bind:class=\"{ 'booked': isBooked, 'selected': isSelected }\">\n    <p>{{ item.seat }}</p>\n    <p id=\"seat-score\">{{ item.seatScore }}</p>\n  </div>\n  <p>{{ item.attendee }}</p>\n</div>\n"
 if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
